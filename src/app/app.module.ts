@@ -11,9 +11,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DatePipe } from '@angular/common';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StudentdetailsComponent } from './studentdetails/studentdetails.component';
 import { MdComponentModule } from './md-component/md-component.module';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,10 @@ import { MdComponentModule } from './md-component/md-component.module';
 
     BrowserAnimationsModule
   ],
-  providers: [DatePipe, { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
+  providers: [DatePipe,
+     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
