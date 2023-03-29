@@ -64,14 +64,37 @@ export class LoginComponent implements OnInit {
 
          this.ds.postData('user', this.loginForm.value)
           .subscribe((res: any) => {
-            console.log(res);
+            console.log("pop",res);
             if (res.error) {
               Swal.fire(res.error.message, "", "error");
             }
             else if (res.token) {
               localStorage.setItem('token', res.token);
               Swal.fire(res.message, "", "success");
-              this.router.navigate(['/studentdetails']);
+
+
+              switch (res['role']) {
+                case 1:
+                  {
+                    this.router.navigate(['/course']);
+                    break;
+                  }
+                case 2: {
+                  this.router.navigate(['/studentdetails']);
+                  break;
+                }
+              
+                default:
+                  {
+                    Swal.fire({
+                      icon: 'error',
+                      text: 'कृपया लॉगिन विवरण जांचें',
+                      timer: 5000
+                    });
+                    break;
+                  }
+              }
+              
               //window.open('http://10.132.2.172/UFP/', "_blank");
             }
           })
