@@ -1,0 +1,66 @@
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+  <mat-card class="Course-card">
+    <mat-card-header>
+      <mat-card-title>Course Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Corse Name" formControlName="name">
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!courseForm.valid">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Course Details</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8" style="overflow: auto ">
+
+
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Course ID</th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Course Name </th>
+          <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[10, 20, 100]"></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
