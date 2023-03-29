@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CourseComponent } from './course/course.component';
-
+import { JwtModule } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DatePipe } from '@angular/common';
@@ -28,7 +28,15 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     ReactiveFormsModule,
     HttpClientModule,
     MdComponentModule,
-
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function tokenGetter() {
+          return localStorage.getItem('token');
+        },
+        // whitelistedDomains: ['localhost:3000'],
+        // blacklistedRoutes: ['http://localhost:3000/auth/login']
+      }
+    }),
     BrowserAnimationsModule
   ],
   providers: [DatePipe,
