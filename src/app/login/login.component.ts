@@ -76,11 +76,11 @@ export class LoginComponent implements OnInit {
               switch (res['role']) {
                 case 1:
                   {
-                    this.router.navigate(['/course']);
+                    this.router.navigate(['/sidebar/course']);
                     break;
                   }
                 case 2: {
-                  this.router.navigate(['/studentdetails']);
+                  this.router.navigate(['/sidebar/studentdetails']);
                   break;
                 }
               

@@ -15,12 +15,19 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StudentdetailsComponent } from './studentdetails/studentdetails.component';
 import { MdComponentModule } from './md-component/md-component.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CourseComponent, StudentdetailsComponent, LoginComponent
+    CourseComponent, StudentdetailsComponent, LoginComponent, SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,13 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
         // blacklistedRoutes: ['http://localhost:3000/auth/login']
       }
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [DatePipe,
      { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
